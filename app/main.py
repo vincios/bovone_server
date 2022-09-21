@@ -2,6 +2,7 @@ import asyncio
 import logging
 from queue import Empty
 
+import uvicorn
 from fastapi import FastAPI, WebSocket, Depends
 from fastapi.encoders import jsonable_encoder
 
@@ -88,3 +89,5 @@ async def websocket_endpoint(websocket: WebSocket, manager: WebSocketManager = D
 
     data_reader_task.unsubscribe(queue)
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=config.server_port)
